@@ -12,17 +12,13 @@ class Person:
 
 
 def create_person_list(people: list) -> list:
-    person_list = []
+    person_list = [Person(person_data["name"], person_data["age"]) for person_data in people]
 
-    for i in people:
-        person = Person(i["name"], i["age"])
-        person_list.append(person)
-
-    for i, person in zip(people, person_list):
-        wife_name = i.get("wife")
+    for person_data, person in zip(people, person_list):
+        wife_name = person_data.get("wife")
         if wife_name is not None:
             person.wife = Person.people[wife_name]
-        husband_name = i.get("husband")
+        husband_name = person_data.get("husband")
         if husband_name is not None:
             person.husband = Person.people[husband_name]
 
